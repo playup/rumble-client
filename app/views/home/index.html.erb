@@ -1,0 +1,31 @@
+<h1><%= @rumble["home_team"] %> Vs. <%= @rumble["away_team"] %></h1>
+
+<b><%= @rumble["home_fan"] %> (<%= @rumble["home_team"] %>)</b><br/>
+Health
+<div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
+    <div style="background-color: #00cc00; width: <%= @rumble["home_fan_health_value"] %>px"><%= @rumble["home_fan_health_value"] %></div>
+</div>
+Attack Capability
+<div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
+    <div style="background-color: #ff9933; width: <%= @rumble["home_fan_attack_value"] %>px"><%= @rumble["home_fan_attack_value"] %></div>
+</div>
+<br/>
+<b><%= @rumble["away_fan"] %> (<%= @rumble["away_team"] %>)</b><br/>
+Health
+<div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
+    <div style="background-color: #00cc00; width: <%= @rumble["away_fan_health_value"] %>px"><%= @rumble["away_fan_health_value"] %></div>
+</div>
+Attack Capability
+<div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
+    <div style="background-color: #ff9933; width: <%= @rumble["away_fan_attack_value"] %>px"><%= @rumble["away_fan_attack_value"] %></div>
+</div>
+
+<br/>
+<br/>
+
+<% @events.each do |event| %>
+  <%= event %>
+  <br/>
+<% end %>
+
+
