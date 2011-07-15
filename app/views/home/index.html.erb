@@ -1,31 +1,40 @@
 <h1><%= @rumble["homeTeam"] %> Vs. <%= @rumble["awayTeam"] %></h1>
 
-<b><%= @rumble["homeFan"] %> (<%= @rumble["awayFan"] %>)</b><br/>
-Health
-<div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
+<div style="width:100%">
+<div style="float:left;width:50%">
+  <b><%= @rumble["homeFan"] %> (<%= @rumble["awayFan"] %>)</b><br/>
+  Health
+  <div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
     <div style="background-color: #00cc00; width: <%= @rumble["homeFanHealthValue"] %>px"><%= @rumble["homeFanHealthValue"] %></div>
-</div>
-Attack Capability
-<div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
+  </div>
+  Attack Capability
+  <div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
     <div style="background-color: #ff9933; width: <%= @rumble["homeFanAttackValue"] %>px"><%= @rumble["homeFanAttackValue"] %></div>
+  </div>
+  <br />
+  <%= image_tag "a.png"%>
 </div>
-<br/>
-<b><%= @rumble["awayFan"] %> (<%= @rumble["awayTeam"] %>)</b><br/>
-Health
-<div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
+<div style="float:left;width:50%">
+  <b><%= @rumble["awayFan"] %> (<%= @rumble["awayTeam"] %>)</b><br/>
+  Health
+  <div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
     <div style="background-color: #00cc00; width: <%= @rumble["awayFanHealthValue"] %>px"><%= @rumble["awayFanHealthValue"] %></div>
-</div>
-Attack Capability
-<div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
+  </div>
+  Attack Capability
+  <div style="border-style:solid; border-width:1px; border-color: black; width: 100px">
     <div style="background-color: #ff9933; width: <%= @rumble["awayFanAttackValue"] %>px"><%= @rumble["awayFanAttackValue"] %></div>
+  </div>
+  <br />
+  <%= image_tag "b.png"%>
 </div>
+ </div>
 
-<br/>
-<br/>
-
-<% @events.each do |event| %>
-  <%= event %>
-  <br/>
-<% end %>
-
+<p>
+    <br />
+  <h1>Events</h1>
+  <% @events.each do |event| %>
+      <%= event %>
+      <br/>
+  <% end %>
+</p>
 
