@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   end
 
   def fetch_rumble_data
-    url = 'http://localhost:8080/rumbles/1'
+    url = 'http://localhost:8080/my/rumbles/1'
     content = open(url).read
     @rumble = JSON.parse(content)
   end
@@ -22,11 +22,12 @@ class HomeController < ApplicationController
   end
 
   def events json
-    events = json["events"] || []
+    p json
+    events = json[":items"] || []
+    p events
     messages = []
     events.each do |event|
-      content = event["event_at"][11..18]
-
+      content = event["eventAt"][11..18]
       team = event["team"]
       fan = event["fan"]
       content += ' '
@@ -41,13 +42,13 @@ class HomeController < ApplicationController
       content += ', ' unless msge.blank?
       content += msge if msge
 
-      diff = event[":type"] == "game_event" ? "+" : "-"
-      health_value_adjust = event["health_value_adjust"]
+      diff = event[":type"] == "gameEvent" ? "+" : "-"
+      health_value_adjust = event["healthValueAdjust"]
       if !health_value_adjust.blank? && health_value_adjust.to_i > 0
         content += ", Health #{diff}#{health_value_adjust}%"
       end
 
-      attack_value_adjust = event["attack_value_adjust"]
+      attack_value_adjust = event["attackValueAdjust"]
       if !attack_value_adjust.blank?
         content += ", Attack #{diff}#{attack_value_adjust}"
       end
