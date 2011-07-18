@@ -22,9 +22,7 @@ class HomeController < ApplicationController
   end
 
   def events json
-    p json
     events = json[":items"] || []
-    p events
     messages = []
     events.each do |event|
       content = event["eventAt"][11..18]
