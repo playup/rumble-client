@@ -2,7 +2,7 @@
 
 <div>
   <div style="float:left;width:50%">
-    <b><%= @rumble["homeFan"] %> (<%= @rumble["awayFan"] %>)</b><br/>
+    <b><%= @rumble["homeFan"] %> (<%= @rumble["homeTeam"] %>)</b><br/>
     Health
     <div style="border-style:solid; border-width:2px; border-color: black; width: 100px">
       <div style="background-color: #00cc00; width: <%= @rumble["homeFanHealthValue"] %>px"><%= @rumble["homeFanHealthValue"] %></div>
@@ -29,8 +29,26 @@
   </div>
 </div>
 
+<div>
+   <h2>Attack your opponent now!</h2>
+  <%= form_tag(@rumble[":actions"][":availableRumbleEvents"][":href"], :method => :post) do %>
+      <div>
+        <%= label_tag 'rumble_event' %>
+        <br/>
+        <%= select_tag("rumble_event", options_for_select(@rumble[":actions"][":availableRumbleEvents"]["properties"]["rumbleEvent"]["availableEvents"])) %>
+      </div>
+      <div>
+        <%= label_tag 'message' %>
+        <br/>
+        <%= text_field_tag 'message' %>
+      </div>
+      <div>
+        <%= submit_tag %>
+      </div>
+  <% end %>
+
+</div>
 <p>
-  <br/>
 <h1>Events</h1>
 <% @events.each do |event| %>
     <%= event %>
