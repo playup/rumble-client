@@ -26,7 +26,7 @@ class RumbleApiService
       navigate(get_first_rumble["eventLog"])
     end
 
-    def navigate(url = '/', params = {})
+    def navigate(url = '/entry', params = {})
       response = self.class.get(url, query: params)
       JSON.parse(response.body)
     end
