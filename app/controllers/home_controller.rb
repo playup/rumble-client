@@ -3,21 +3,17 @@ require 'json'
 
 class HomeController < ApplicationController
 
-  def index
+  def index    
     fetch_rumble_data
     fetch_events_data
   end
 
-  def fetch_rumble_data
-    url = 'http://localhost:8080/my/rumbles/1'
-    content = open(url).read
-    @rumble = JSON.parse(content)
+  def fetch_rumble_data    
+    @rumble = RumbleApiService.instance.get_first_rumble.tap{|r| p r}
   end
 
-  def fetch_events_data
-    url = 'http://localhost:8080/rumble_log/1'
-    content = open(url).read
-    json = JSON.parse(content)
+  def fetch_events_data    
+    json = RumbleApiService.instance.get_event_log_for_first_rumble
     @events = events(json)
   end
 

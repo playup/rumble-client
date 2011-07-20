@@ -1,11 +1,10 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.7'
-
 gem 'mysql2', '~> 0.2.0'
-
 gem 'json'
-
+gem 'rails_config'
+gem 'httparty'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
