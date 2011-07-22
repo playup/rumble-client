@@ -24,6 +24,10 @@ class RumbleApiService
     end
   end
 
+  def rumble_event_types
+    navigate(entry_point["rumbleEventTypes"])[":items"]
+  end
+
   def get_event_log_for_first_rumble
     begin
       navigate(get_first_rumble["eventLog"])

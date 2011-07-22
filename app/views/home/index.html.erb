@@ -54,6 +54,19 @@
     This Rumble Event is not available.
 <% end %>
 
+<h1>Event Types</h1>
+
+<% if @rumble_event_types %>
+    <p>
+      <% @rumble_event_types.each do |event_type| %>
+          <%= event_type["description"] %> - Energy: <%= event_type["energyAdjust"] %>  Health: <%= event_type["healthAdjust"] %>
+          <br/>
+      <% end %>
+    </p>
+<% else %>
+    Event types are not available.
+<% end %>
+
 <h1>Events</h1>
 <% if @events %>
     <p>

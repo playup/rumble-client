@@ -6,7 +6,13 @@ class HomeController < ApplicationController
   def index    
     fetch_rumble_data
     fetch_events_data
+    fetch_rumble_event_types
   end
+
+  def fetch_rumble_event_types
+    @rumble_event_types = RumbleApiService.instance.rumble_event_types
+  end
+
 
   def fetch_rumble_data    
     @rumble = RumbleApiService.instance.get_first_rumble
