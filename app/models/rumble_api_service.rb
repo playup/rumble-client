@@ -28,6 +28,16 @@ class RumbleApiService
 
     def navigate(url = '/entry', params = {})
       response = self.class.get(url, query: params)
-      JSON.parse(response.body)
+      content = JSON.parse(response.body)
+      content["result"].present? && content["result"] == "error" ? raise_api_error(content) : content
+    end
+
+    protected
+    
+    def raise_api_error(error_json)
+      message = error_json["errors"]["record"].present? ? error_json["errors"]["record"] : error_json["errors"]["general_error"]
+      raise(RumbleApiError, "The Rumble API encountered the following error: #{message}")
     end
 end
+
+class RumbleApiError < Exception ; end
