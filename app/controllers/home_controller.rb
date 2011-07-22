@@ -14,7 +14,7 @@ class HomeController < ApplicationController
 
   def fetch_events_data    
     json = RumbleApiService.instance.get_event_log_for_first_rumble
-    @events = events(json)
+    @events = events(json) if json
   end
 
   def events json
