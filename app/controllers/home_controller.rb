@@ -33,7 +33,7 @@ class HomeController < ApplicationController
       content += ' '
 
       content += team if team
-      content += fan if fan
+      content += fan.humanize if fan
 
       event_name = event["event"]
       content += ', ' unless event_name.blank?

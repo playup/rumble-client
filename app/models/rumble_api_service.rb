@@ -33,6 +33,7 @@ class RumbleApiService
       navigate(get_first_rumble["eventLog"])
     rescue Exception => e
       Rails.logger.error("Exception encountered while parsing json")
+      Rails.logger.error(e)
       return nil
     end
   end

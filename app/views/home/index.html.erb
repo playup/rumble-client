@@ -1,54 +1,53 @@
 <% if @rumble %>
-    <h1><%= @rumble["homeTeam"] %> Vs. <%= @rumble["awayTeam"] %></h1>
+    <h1><%= @rumble["homeTeam"] %> vs. <%= @rumble["awayTeam"] %></h1>
 
-    <div>
+    <div style="width:100%">
       <div style="float:left;width:50%">
-        <b><%= @rumble["homeFan"] %> (<%= @rumble["homeTeam"] %>)</b><br/>
-        Health
+        <b><%= @rumble["homeFan"].humanize %> (<%= @rumble["homeTeam"] %>)</b><br/>
+         Health
         <div style="border-style:solid; border-width:2px; border-color: black; width: 100px">
-          <div style="background-color: #00cc00; width: <%= @rumble["homeFanHealthValue"] %>px"><%= @rumble["homeFanHealthValue"] %></div>
+          <div style="color:#000000;background-color: #00cc00; width: <%= @rumble["homeFanHealthValue"] %>px"><%= @rumble["homeFanHealthValue"] %></div>
         </div>
         Attack Capability
         <div style="border-style:solid; border-width:2px; border-color: black; width: 100px">
-          <div style="background-color: #ff9933; width: <%= @rumble["homeFanAttackValue"] %>px"><%= @rumble["homeFanAttackValue"] %></div>
+          <div style="color:#000000;background-color: #ff9933; width: <%= @rumble["homeFanAttackValue"] %>px"><%= @rumble["homeFanAttackValue"] %></div>
         </div>
         <br/>
         <%= image_tag "a.png" %>
       </div>
       <div style="float:left;width:50%">
-        <b><%= @rumble["awayFan"] %> (<%= @rumble["awayTeam"] %>)</b><br/>
+        <b><%= @rumble["awayFan"].humanize %> (<%= @rumble["awayTeam"] %>)</b><br/>
         Health
         <div style="border-style:solid; border-width:2px; border-color: black; width: 100px">
-          <div style="background-color: #00cc00; width: <%= @rumble["awayFanHealthValue"] %>px"><%= @rumble["awayFanHealthValue"] %></div>
+          <div style="color:#000000;background-color: #00cc00; width: <%= @rumble["awayFanHealthValue"] %>px"><%= @rumble["awayFanHealthValue"] %></div>
         </div>
         Attack Capability
         <div style="border-style:solid; border-width:2px; border-color: black; width: 100px">
-          <div style="background-color: #ff9933; width: <%= @rumble["awayFanAttackValue"] %>px"><%= @rumble["awayFanAttackValue"] %></div>
+          <div style="color:#000000;background-color: #ff9933; width: <%= @rumble["awayFanAttackValue"] %>px"><%= @rumble["awayFanAttackValue"] %></div>
         </div>
         <br/>
         <%= image_tag "b.png" %>
       </div>
     </div>
-
+    <div style="clear:both;"></div>
     <div>
-      <h2>Attack your opponent now!</h2>
-
+      <h1>Attack your opponent now!</h1>
       <%= form_tag(@rumble[":actions"][":availableRumbleEvents"][":href"], :method => :post) do %>
           <div>
-            <%= label_tag 'rumble_event' %>
-            <br/>
+            <%= label_tag 'Choose an attack execution type', nil,  :id => 'label'%>:
             <%= select_tag("rumble_event", options_for_select(@rumble[":actions"][":availableRumbleEvents"]["properties"]["rumbleEvent"]["availableEvents"])) %>
-          </div>
-          <div>
-            <%= label_tag 'message' %>
             <br/>
-            <%= text_field_tag 'message' %>
+          </div>
+          <br/>
+
+          <div>
+            <%= label_tag 'Add Insult To Injury', nil, :id => 'label'%>: <%= text_field_tag 'message' %>
+            <br/><br/>
           </div>
           <div>
-            <%= submit_tag %>
+            <%= submit_tag 'Onslaught!', id: "submit" %>
           </div>
       <% end %>
-
     </div>
 <% else %>
     This Rumble Event is not available.
@@ -59,23 +58,25 @@
 <% if @rumble_event_types %>
     <p>
       <% @rumble_event_types.each do |event_type| %>
-          <%= event_type["description"] %> - Energy: <%= event_type["energyAdjust"] %>  Health: <%= event_type["healthAdjust"] %>
+          <b><%= event_type["description"] %></b> - Energy: <%= event_type["energyAdjust"] %>
+          Health: <%= event_type["healthAdjust"] %>
           <br/>
       <% end %>
     </p>
 <% else %>
     Event types are not available.
 <% end %>
-
-<h1>Events</h1>
-<% if @events %>
-    <p>
-      <% @events.each do |event| %>
-          <%= event %>
-          <br/>
-      <% end %>
-    </p>
-<% else %>
-    Event log is not available.
-<% end %>
+<div id="content">
+  <h1>Events</h1>
+  <% if @events %>
+      <p>
+        <% @events.each do |event| %>
+            <%= event %>
+            <br/>
+        <% end %>
+      </p>
+  <% else %>
+      Event log is not available.
+  <% end %>
+</div>
 
