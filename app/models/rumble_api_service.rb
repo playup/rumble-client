@@ -5,22 +5,21 @@ class RumbleApiService
   format :json
 
   def entry_point
-    navigate
+    @navigate ||= navigate
   end
 
   def profile
-    navigate(entry_point["profile"]) if entry_point
+    @profile ||= navigate(entry_point["profile"]) if entry_point
   end
 
   def current_rumbles
-    profile["currentRumbles"] if profile
+    @current_rumbles ||= profile["currentRumbles"] if profile
   end
 
   def get_first_rumble
-    if current_rumbles
-      rumbles = current_rumbles
+    if rumbles = current_rumbles
       raise "There are no rumbles created for this user" if rumbles[":count"].to_i == 0
-      navigate(rumbles[":items"].first[":href"])
+      @first_rumble ||= navigate(rumbles[":items"].first[":href"])
     end
   end
 
@@ -49,9 +48,9 @@ class RumbleApiService
       return nil
     end
   end
-  
+
     protected
-    
+
     def raise_api_error(error_json)
       message = error_json["errors"]["record"].present? ? error_json["errors"]["record"] : error_json["errors"]["general_error"]
       raise(RumbleApiError, "The Rumble API encountered the following error: #{message}")
